@@ -29,6 +29,6 @@ module.exports = {
             "never"
         ],
         "no-console": 0,
-        "no-unused-vars": 0
+        "no-unused-vars": 1
     }
 };
