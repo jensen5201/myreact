@@ -4,6 +4,7 @@ const webpack = require('webpack')
 const merge = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const portfinder = require('portfinder')
 const config = require('../config')
 
@@ -24,7 +25,7 @@ const devConfig = {
   devServer: {
     host: process.env.host || config.dev.host,
     port: process.env.port || config.dev.port,
-    // contentBase: resolve('dist'),
+    contentBase: false,
     publicPath: config.dev.assetsPublicPath,
     open: config.dev.autoOpenBrowser,
     historyApiFallback: true,
@@ -59,6 +60,13 @@ const devConfig = {
         ],
       },
     }),
+    new CopyWebpackPlugin([
+      {
+        from: resolve('static'),
+        to: config.dev.assetsSubDirectory,
+        ignore: ['.*'],
+      },
+    ]),
   ],
 }
 module.exports = merge(commonConfig, devConfig)
