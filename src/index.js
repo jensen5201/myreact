@@ -1,30 +1,35 @@
-// var func = str => {
-//   document.getElementById('app').innerHTML = str;
-// };
-// func('我现在在使用Babel!');
-
 import React from 'react'
 import ReactDom from 'react-dom'
-// import Hello from './component/Hello/Hello'
-
-import getRouter from '@/router/router'
+// import getRouter from '@/router/router'
 import { AppContainer } from 'react-hot-loader'
+import { Provider } from 'react-redux'
+import store from '@/redux/store'
+import App from '@/components/App/App'
+import { BrowserRouter as Router } from 'react-router-dom'
+
+// 是否启用mock
+process.env.MOCK && require('mock/mock')
 
 /*初始化*/
-renderWithHotReload(getRouter())
+renderWithHotReload(App)
 
 /*热更新*/
-console.log(module, module.hot)
 if (module.hot) {
-  module.hot.accept('./router/router', () => {
-    const getRouter = require('./router/router').default
-    renderWithHotReload(getRouter())
+  module.hot.accept('./components/App/App', () => {
+    const NextApp = require('./components/App/App').default
+    renderWithHotReload(NextApp)
   })
 }
 
 function renderWithHotReload(RootElement) {
   ReactDom.render(
-    <AppContainer>{RootElement}</AppContainer>,
+    <AppContainer>
+      <Provider store={store}>
+        <Router>
+          <RootElement />
+        </Router>
+      </Provider>
+    </AppContainer>,
     document.getElementById('app')
   )
 }
