@@ -3,7 +3,7 @@ import './Page1.css'
 import image from '@/assets/imgs/004.jpg'
 
 export default class Home extends Component {
-  render() {
+  render  () {
     return (
       <div className="page-box">
         this is page1~
