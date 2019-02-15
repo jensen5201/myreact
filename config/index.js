@@ -11,7 +11,7 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
 
-    devtool: 'inline-source-map',
+    devtool: 'eval-source-map',
     host: '0.0.0.0',
     port: 8585,
     autoOpenBrowser: false,
