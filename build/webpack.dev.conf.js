@@ -1,3 +1,4 @@
+'use strict'
 const path = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
@@ -21,12 +22,14 @@ const devConfig = {
     filename: '[name].[hash].js',
   },
   devServer: {
-    host: config.dev.host,
-    port: config.dev.port,
-    contentBase: resolve('dist'),
-    historyApiFallback: true,
+    host: process.env.host || config.dev.host,
+    port: process.env.port || config.dev.port,
+    // contentBase: resolve('dist'),
+    publicPath: config.dev.assetsPublicPath,
     open: config.dev.autoOpenBrowser,
+    historyApiFallback: true,
     quiet: true,
+    hot: true,
   },
   module: {
     rules: [
@@ -42,6 +45,7 @@ const devConfig = {
         MOCK: true,
       },
     }),
+    new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: resolve('src/index.html'),
@@ -50,7 +54,7 @@ const devConfig = {
       compilationSuccessInfo: {
         messages: [
           `Your application is running here: http://${config.dev.host}:${
-            process.env.port
+            config.dev.port
           }`,
         ],
       },

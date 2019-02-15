@@ -1,3 +1,4 @@
+'use strict'
 const path = require('path')
 
 function resolve(dir) {
@@ -6,18 +7,24 @@ function resolve(dir) {
 
 module.exports = {
   dev: {
+    // paths
+    assetsSubDirectory: 'static',
+    assetsPublicPath: '/',
+
+    devtool: 'inline-source-map',
     host: '0.0.0.0',
     port: 8585,
     autoOpenBrowser: false,
     useEslint: true,
-    devtool: 'inline-source-map',
     proxyTable: {},
   },
   build: {
-    devtool: 'cheap-module-source-map',
-    index: resolve('dist/index.html'),
+    // paths
     assetsRoot: resolve('dist'),
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
+
+    devtool: 'cheap-module-source-map',
+    index: resolve('dist/index.html'),
   },
 }

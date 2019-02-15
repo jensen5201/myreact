@@ -6,7 +6,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --config build/webpack.dev.conf.js --color --progress --hot",
+    "dev": "webpack-dev-server --config build/webpack.dev.conf.js --color --progress",
     "build": "webpack --config build/webpack.prod.conf.js",
     "lint": "eslint src"
   },
